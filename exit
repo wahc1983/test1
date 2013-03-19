@@ -1,0 +1,24 @@
+commit 5eeea4e084b7cef39380385827137049eb25a7fa
+Merge: ec3396b 4cdd2a1
+Author: wahc1983 <williamhuertas1015@gmail.com>
+Date:   Tue Mar 19 17:57:17 2013 +0100
+
+    Merge branch 'master' of github.com:wahc1983/test1
+
+commit ec3396b6cfda10feb2841d7bac63ebf062f04614
+Author: wahc1983 <williamhuertas1015@gmail.com>
+Date:   Tue Mar 19 17:47:14 2013 +0100
+
+    mi primer commit
+
+commit 4cdd2a13812488434a2062967784b95416e09446
+Author: william <williamhuertas1015@gmail.com>
+Date:   Tue Mar 19 08:02:51 2013 -0700
+
+    Initial commit
+
+commit e4f98c5ff94a350d9c39e800531dc577aaaa4e6a
+Author: wss_2 <wss@wss2.(none)>
+Date:   Tue Mar 19 15:43:58 2013 +0100
+
+    se cambio el contenido de public/index.html
