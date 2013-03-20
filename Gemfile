@@ -12,6 +12,11 @@ gem 'omniauth-github'
 gem 'omniauth-openid'
 gem 'cancan'
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'carrierwave'
+gem "nifty-generators", :group => :development
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -40,3 +45,5 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
+gem "mocha", :group => :test
