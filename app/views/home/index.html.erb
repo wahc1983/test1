@@ -1,2 +1,8 @@
 <h1>WELCOME</h1>
 <p>William Huertas</p>
+<div>
+<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+</div>
+<div>
+<%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) %>
+</div>

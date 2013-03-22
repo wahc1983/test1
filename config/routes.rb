@@ -1,7 +1,10 @@
 Test1::Application.routes.draw do
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  
   resources :blogs
-
-
+ 
+  get "home" => 'home#index'
+  post "home" => 'home#index'
   get "home/index"
 
   # The priority is based upon order of creation:

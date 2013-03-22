@@ -1,6 +1,10 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+ENV['FACEBOOK_KEY'] = '128671290538912'
+ENV['FACEBOOK_SECRET'] = 'a0428fd6534049b7e36b8b7d8418988e'
+ENV['CONSUMER_KEY'] = 'e1b5jxcZp2aGLboCDs8Q'
+ENV['CONSUMER_SECRET'] = 'TSC7ytuQPlSdEILuBMHvfsWs6FtT83k3JoznnqHc0'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line

@@ -82,7 +82,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = "cb18daea16afdbe17b976f0b41403294012ebc983a08d0220089946cd1f24972d77d597b44dfcea2a73b486c1909c2aa0f870d22191cb207af40b550d5c839bd"
+  # config.pepper = "ef73f4bb069d75737cdcccdc55c7b704ff86492bf3e04c0753ae00f68743ca7bfd27b6600d93f620efd332fd8fa79673981da35725083929167c7594cb7bd0cb"
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -186,7 +186,7 @@ Devise.setup do |config|
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
-  config.scoped_views = true
+  # config.scoped_views = false
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).
@@ -213,8 +213,10 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
-
+  #require "omniauth-facebook"
+  config.omniauth :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET'], :strategy_class => OmniAuth::Strategies::Facebook 
+  config.omniauth :twitter, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']
+  
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
@@ -237,6 +239,5 @@ Devise.setup do |config|
   # When using omniauth, Devise cannot automatically set Omniauth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = "/my_engine/users/auth"
-require "omniauth-facebook"
-config.omniauth :facebook, "9dfe71781ca665a8253596dbdc28a208", "a0428fd6534049b7e36b8b7d8418988e"
+
 end
