@@ -8,7 +8,7 @@ Rails.logger.debug( 'Twitter Before Persisted' )
 Rails.logger.debug( User.all.size.to_s )
     if ( @user.persisted? )
 Rails.logger.debug( 'Twitter Inside Persisted' )
-      #sign_in_and_redirect( @user, { :event => :authentication } ) 
+      sign_in_and_redirect( @user, { :event => :authentication } ) 
       set_flash_message( :notice, :success, { :kind => "twitter" } ) if ( is_navigational_format? )
     else
 Rails.logger.debug( 'Twitter Else Persisted' )
@@ -27,7 +27,7 @@ Rails.logger.debug( User.all.size.to_s )
 
     if ( @user.persisted? )
 Rails.logger.debug( 'Facebook Inside Persisted' )
-      #sign_in_and_redirect( @user, { :event => :authentication } ) #this will throw if @user is not activated
+      sign_in_and_redirect( @user, { :event => :authentication } ) #this will throw if @user is not activated
       set_flash_message( :notice, :success, { :kind => "Facebook" } ) if ( is_navigational_format? )
     else
 Rails.logger.debug( 'Facebook Else Persisted' )
