@@ -5,7 +5,7 @@ Rails.logger.debug( 'Twitter Before Find' )
 Rails.logger.debug( User.all.size.to_s )
         @user = User.find_for_twitter_oauth(request.env["omniauth.auth"], current_user)
 Rails.logger.debug( 'Twitter Before Persisted' )
-Rails.logger.debug( User.all.size.to_s )
+Rails.logger.debug( request.env["omniauth.auth"].to_s )
     if ( @user.persisted? )
 Rails.logger.debug( 'Twitter Inside Persisted' )
       sign_in_and_redirect( @user, { :event => :authentication } ) 
@@ -36,5 +36,4 @@ Rails.logger.debug( 'Facebook Else Persisted' )
     end
   end
 
-  
 end
