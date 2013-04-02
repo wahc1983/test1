@@ -77,8 +77,7 @@ end
     # 1.2. Si no existe, crear el usuario con los datos suministrados por el proveedor incluyendo la authentication.
     user = User.where( { :provider => auth.provider, :uid => auth.uid } ).first
     unless( user )
-      user = User.create( { #name:auth.extra.raw_info.name,
-                            provider:auth.provider,
+      user = User.create( { provider:auth.provider,
                             uid:auth.uid,
                             email:auth.info.email,
                             password:Devise.friendly_token[0,20],
@@ -105,5 +104,26 @@ end
     end
     return( user )
   end
+
+  #=============================================================
+  # create_login_facebook
+  #=============================================================
+
+before_validation :create_login
+
+  def create_login
+Rails.logger.debug( 'create_login_facebook' )             
+    email = self.email.split(/@/)
+    login_taken = User.where( {:login => email[0]}).first
+    unless login_taken
+      return( self.login = email[0])
+    else	
+      return(self.login = self.email)
+    end	       
+  end
+
+  #def self.find_for_database_authentication(conditions)
+  #  return(self.where( {:login => conditions[:email]}).first || self.where({:email => conditions[:email]}).first)
+  #end
 
 end
