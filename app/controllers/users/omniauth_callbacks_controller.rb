@@ -2,10 +2,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
 def twitter
 Rails.logger.debug( 'Twitter Before Find' )
-Rails.logger.debug( User.all.size.to_s )
         @user = User.find_for_twitter_oauth(request.env["omniauth.auth"], current_user)
 Rails.logger.debug( 'Twitter Before Persisted' )
 Rails.logger.debug( request.env["omniauth.auth"].to_s )
+
     if ( @user.persisted? )
 Rails.logger.debug( 'Twitter Inside Persisted' )
       sign_in_and_redirect( @user, { :event => :authentication } ) 
@@ -19,7 +19,7 @@ Rails.logger.debug( 'Twitter Else Persisted' )
   
 def facebook
 Rails.logger.debug( 'Facebook Before Find' )
-Rails.logger.debug( User.all.size.to_s )
+Rails.logger.debug( request.env["omniauth.auth"].to_s )
     # You need to implement the method below in your model (e.g. app/models/user.rb)
     @user = User.find_for_facebook_oauth(request.env["omniauth.auth"], current_user)
 Rails.logger.debug( 'Facebook Before Persisted' )

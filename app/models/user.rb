@@ -5,11 +5,13 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable, :recoverable,
          :rememberable, :trackable, :validatable, :omniauthable, 
-	 :omniauth_providers => [:facebook, :twitter],:authentication_keys => [:login]
+	 :omniauth_providers => [:facebook, :twitter],:authentication_keys => [:login2]
   # Setup accessor
-  attr_accessor :login
+  attr_accessor :login2
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :provider, :uid, :login
+  attr_accessible :login, :email, :password, :password_confirmation, :remember_me, :provider, :uid, :login2
+  validates :login, :uniqueness => {:message => "is already in use"}, :presence => {:message => "can't be empty"}
+
 
   before_validation :before_validation_handler
 def before_validation_handler
@@ -55,17 +57,14 @@ end
  #=============================================================
  # self.find_first_by_auth_conditions
  #=============================================================
-Rails.logger.debug( 'Before Find' )
+
   def self.find_first_by_auth_conditions(warden_conditions)
-Rails.logger.debug( 'inside Find' )
       conditions = warden_conditions.dup
-srghryhrtyh
-     if login = conditions.delete(:login)
-        where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+     if login = conditions.delete(:login2)
+        return( where(conditions).where(["lower(login) = :value or lower(email) = :value", { :value => login.downcase }]).first )
      else
-      where(conditions).first
+      return( where(conditions).first )
      end
-Rails.logger.debug( 'after Find' )   
 end
 
   
@@ -82,7 +81,8 @@ end
                             provider:auth.provider,
                             uid:auth.uid,
                             email:auth.info.email,
-                            password:Devise.friendly_token[0,20]
+                            password:Devise.friendly_token[0,20],
+                            #login : 
                          })
     end
     return( user )
@@ -96,29 +96,14 @@ end
   def self.find_for_twitter_oauth(auth, signed_in_resource=nil)
     user = User.where( { :provider => auth.provider, :uid => auth.uid } ).first
     unless( user )
-      user = User.create( { #name:auth.extra.raw_info.name,
-                            provider:auth.provider,
+      user = User.create( { provider:auth.provider,
                             uid:auth.uid,
-                            email:nil,
+			    login:auth.info.nickname,
+                            email:auth.info.nickname+'@change.me',
                             password:Devise.friendly_token[0,20]
-                         })
+                            })
     end
     return( user )
   end
-
-
-  
-  #=============================================================
-  # self.find_for_database_authentication
-  #=============================================================
-
-def self.find_for_database_authentication(warden_conditions)
-  conditions = warden_conditions.dup
-  if login = conditions.delete(:login).downcase
-    where(conditions).where('$or' => [ {:username => /^#{Regexp.escape(login)}$/i}, {:email => /^#{Regexp.escape(login)}$/i} ]).first
-  else
-    where(conditions).first
-  end
-end 
 
 end
